@@ -14,10 +14,14 @@ let keyboardСontainer = document.createElement('div');
 keyboardСontainer.classList.add('keyboard-container');
 section.append(keyboardСontainer);
 
-
-
   for(let i = 0; i < 5; i++) {
     let keyboardRow = document.createElement('div');
     keyboardRow.classList.add('keyboard-row');
     keyboardСontainer.append(keyboardRow);
   }
+
+  let key = document.createElement('div');
+  key.classList.add('key');
+ 
+  let rows = document.getElementsByClassName('keyboard-row');
+  rows[0].append(key);
