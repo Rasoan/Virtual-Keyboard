@@ -208,7 +208,18 @@ function inner_html(language) {
 
 
 }
-inner_html("en"); // добавить все клавиши
+ // добавить все клавиши
+
+window.addEventListener("load", function() {
+  if (localStorage.language == "ru" || localStorage.language == "en") {
+    inner_html(localStorage.language);
+  }
+  else inner_html("en");
+});
+
+
+
+
 let flag = false;
 let key_div;
   
@@ -250,7 +261,7 @@ document.addEventListener('keydown', function(e) {
         });
         
         
-
+         localStorage.language = "ru";
          inner_html("ru");
          flag = true;
          return;
@@ -262,6 +273,7 @@ document.addEventListener('keydown', function(e) {
        element.innerHTML = "";
      });
         document.getElementsByClassName('keyboard-container').innerHTML = "";
+        localStorage.language = "en";
         inner_html("en");
         flag = false;
         return;
@@ -355,3 +367,4 @@ document.addEventListener('keydown', function(e) {
 
 
 // pul
+
