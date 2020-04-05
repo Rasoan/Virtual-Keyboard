@@ -215,6 +215,15 @@ window.addEventListener("load", function() {
     inner_html(localStorage.language);
   }
   else inner_html("en");
+
+
+  document.querySelector('.entry-field').focus();
+});
+
+let body = document.querySelector('body');
+
+body.addEventListener('click', function(e){
+  document.querySelector('.entry-field').focus();
 });
 
 
@@ -368,3 +377,4 @@ document.addEventListener('keydown', function(e) {
 
 // pul
 
+ 
