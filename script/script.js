@@ -7,7 +7,7 @@ h1.innerHTML = "RSS Виртуальная клавиатура";
 section.append(h1);
 let textarea = document.createElement('textarea');
 textarea.classList.add('entry-field');
-textarea.setAttribute('cols', 10);
+textarea.setAttribute('cols', 100);
 section.append(textarea);
 let keyboardСontainer = document.createElement('div');
 keyboardСontainer.classList.add('keyboard-container');
