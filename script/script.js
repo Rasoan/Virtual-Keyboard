@@ -1,21 +1,18 @@
+/* eslint-disable prefer-arrow-callback */
 let section = document.createElement('section');
 document.body.append(section);
-
 let h1 = document.createElement('h1');
 h1.classList.add("tittle");
 h1.innerHTML = "RSS Виртуальная клавиатура";
 section.append(h1);
-
 let textarea = document.createElement('textarea');
 textarea.classList.add('entry-field');
 textarea.setAttribute('cols', 50);
 section.append(textarea);
-
 let keyboardСontainer = document.createElement('div');
 keyboardСontainer.classList.add('keyboard-container');
 keyboardСontainer.id = "keyboard-id";
 section.append(keyboardСontainer);
-
 for (let i = 0; i < 5; i++) {
   let keyboardRow = document.createElement('div');
   keyboardRow.classList.add('keyboard-row');
@@ -1006,9 +1003,17 @@ document.addEventListener('mousedown', function (e) {
        textarea_inp.selectionEnd = current_pos;  
     }
 
+    if ( e.target.classList.contains('key-capslk') && e.target.innerHTML == element.innerHTML ) {
+      document.querySelectorAll('.key').forEach(element => {
+
+        if (!element.classList.contains('key-special'))
+          element.classList.toggle('key-style-toupper')
+      });
+    }
+
   });
   
-});
+});п
 
 document.addEventListener('mouseup', function (e) {
   const keys_div = document.querySelectorAll('.key');
@@ -1016,5 +1021,11 @@ document.addEventListener('mouseup', function (e) {
     element.classList.remove('key-active');
   });
 });
+
+
+
+
+
+  
 
 
