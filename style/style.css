@@ -9,8 +9,8 @@
 .entry-field {
   display: block;
   resize: none;
-  width: 1000px;
   min-height: 100px;
+  padding: 10px;
   margin: 0 auto 30px;
   font-weight: bold;
   font-size: 20px;
@@ -63,7 +63,7 @@
 
 .key:hover {
  cursor: pointer;
- box-shadow: inset 0px 0px 10px 1px rgba(34, 23, 210, 0.84);
+ box-shadow: 0px 6px 4px 0px rgba(34, 23, 210, 0.84), inset 0px 0px 10px 1px rgba(34, 23, 210, 0.84);
  border: 1px solid rgba(34, 23, 210, 0.1);
 }
 
@@ -205,3 +205,7 @@ text-transform: uppercase; /* Заглавные буквы */
     
   
 }
+
+
+
+
