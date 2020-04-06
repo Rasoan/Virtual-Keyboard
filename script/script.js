@@ -1005,7 +1005,6 @@ document.addEventListener('mousedown', function (e) {
 
     if ( e.target.classList.contains('key-capslk') && e.target.innerHTML == element.innerHTML ) {
       document.querySelectorAll('.key').forEach(element => {
-
         if (!element.classList.contains('key-special'))
           element.classList.toggle('key-style-toupper')
       });
@@ -1013,7 +1012,7 @@ document.addEventListener('mousedown', function (e) {
 
   });
   
-});п
+})
 
 document.addEventListener('mouseup', function (e) {
   const keys_div = document.querySelectorAll('.key');
