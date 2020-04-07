@@ -825,16 +825,14 @@ let key_div;
 
 
 document.addEventListener('keydown', function (e) {
+ 
 
   if (e.shiftKey == true && e.altKey == true && flag == false && e.ctrlKey != true) {
-
-
     key_div = document.querySelectorAll('.keyboard-row');
 
     key_div.forEach(element => {
       element.innerHTML = "";
     });
-
 
     localStorage.language = "ru";
     inner_html("ru");
@@ -849,10 +847,10 @@ document.addEventListener('keydown', function (e) {
 
   if (e.shiftKey == true && e.altKey == true && flag == true && e.ctrlKey != true) {
     key_div = document.querySelectorAll('.keyboard-row');
+    
     key_div.forEach(element => {
       element.innerHTML = "";
     });
-    document.getElementsByClassName('keyboard-container').innerHTML = "";
     localStorage.language = "en";
     inner_html("en");
     document.querySelectorAll('.key').forEach(element => {
@@ -863,8 +861,6 @@ document.addEventListener('keydown', function (e) {
     flag = false;
     return;
   }
-
-
 });
 
 
