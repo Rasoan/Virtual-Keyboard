@@ -5,9 +5,34 @@ let h1 = document.createElement('h1');
 h1.classList.add("tittle");
 h1.innerHTML = "RSS Виртуальная клавиатура";
 section.append(h1);
+
+ let button_keyboard_reference = document.createElement('button'); 
+ button_keyboard_reference.classList.add('button_reference');
+ button_keyboard_reference.innerHTML = "Инструкция по использованию виртуальной клавиатуры";
+ section.append(button_keyboard_reference);
+
+let reference_container = document.createElement('div');
+reference_container.classList.add('reference', 'none');
+reference_text = document.createElement('p');
+reference_text.classList.add('reference__text');
+
+reference_text.innerHTML = "Привет\n" + 
+                            "1) Раскладки виртуальной клавиатуры и твоей физической должны совпадать;\n" +
+                            "_______________________________\n" +
+                            "2) Для переключения раскладки виртуальной клавиатуры используй сочетание клавишь Ctrl + Shift на твоей физической;\n" +
+                            "_______________________________\n" +
+                            "3) После проверки моей работы оставь пожалуйста свои контакты, telegram или вк или дискорд," +
+                                "что бы можно было уточнить возникшие вопросы;\n" +
+                                "_______________________________\n" +
+                            "4) По вопросам можно писать мне в телеграмм,\nAraik Rasoyan\n(+375 25 664 30 70);\n" +
+                            "_______________________________\n" +
+                            "Спасибо за внимание.";
+reference_container.append(reference_text);
+section.append(reference_container);
+
 let textarea = document.createElement('textarea');
 textarea.classList.add('entry-field');
-textarea.setAttribute('cols', 100);
+textarea.setAttribute('cols', 50);
 section.append(textarea);
 let keyboardСontainer = document.createElement('div');
 keyboardСontainer.classList.add('keyboard-container');
@@ -18,6 +43,15 @@ for (let i = 0; i < 5; i++) {
   keyboardRow.classList.add('keyboard-row');
   keyboardСontainer.append(keyboardRow);
 }
+
+const modal_click = document.querySelector('.button_reference');
+
+modal_click.addEventListener('click', element => {
+    document.querySelector('.reference').classList.toggle('none');
+})
+
+
+
 
 
 let rows = document.getElementsByClassName('keyboard-row');
@@ -932,6 +966,8 @@ document.addEventListener('keydown', function (e) {
 
 
 
+
+
 document.addEventListener('mousedown', function (e) {
   const keys_div = document.querySelectorAll('.key');
   let textarea_inp = document.querySelector('.entry-field');
@@ -945,7 +981,11 @@ document.addEventListener('mousedown', function (e) {
 
   keys_div.forEach( element => {  // произошло событие клик
     
-    if (  !e.target.classList.contains('key-special') && e.target.innerHTML == element.innerHTML ) {  // если произошло событие клик по кнопке 
+    if (  !e.target.classList.contains('key-special') && e.target.innerHTML == element.innerHTML ||
+           e.target.classList.contains('key-left') && e.target.innerHTML == element.innerHTML ||
+           e.target.classList.contains('key-top') && e.target.innerHTML == element.innerHTML ||
+           e.target.classList.contains('key-right') && e.target.innerHTML == element.innerHTML ||
+           e.target.classList.contains('key-bottom') && e.target.innerHTML == element.innerHTML ) {  // если произошло событие клик по кнопке 
                                                                                                        // и это не специальная кнопка ( типа shift..)
        e.target.classList.add('key-active');               // добавили тогда этой клавише класс active
        let letter = element.innerText;                     // положили в временную переменную букву из клавиатуры по которой тыркнули мышкой
@@ -999,33 +1039,7 @@ document.addEventListener('mousedown', function (e) {
        textarea_inp.selectionEnd = current_pos;  
     }
 
-    if ( e.target.classList.contains('key-left') && e.target.innerHTML == element.innerHTML ) {   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
-       textarea_inp.selectionStart = current_pos-1;        // вернули курсор в прежнюю позицию + 1 символ
-       textarea_inp.selectionEnd = current_pos-1;  
-    }
-
-    if ( e.target.classList.contains('key-right') && e.target.innerHTML == element.innerHTML ) {   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
-      textarea_inp.selectionStart = current_pos +1;        // вернули курсор в прежнюю позицию + 1 символ
-      textarea_inp.selectionEnd = current_pos +1;  
-    }
-
-    if ( e.target.classList.contains('key-top') && e.target.innerHTML == element.innerHTML && current_pos > textarea_inp.cols ) {   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
-      let new_array_textarea = [...textarea_inp.value];
-      if (new_array_textarea[current_pos-1] == "\n") {
-        textarea_inp.selectionStart = current_pos - 1;        // вернули курсор в прежнюю позицию + 1 символ
-      textarea_inp.selectionEnd = current_pos  - 1;
-      return;
-      }
-
-      textarea_inp.selectionStart = current_pos - textarea_inp.cols - 1;        // вернули курсор в прежнюю позицию + 1 символ
-      textarea_inp.selectionEnd = current_pos - textarea_inp.cols - 1;
-    }
-
-    if ( e.target.classList.contains('key-bottom') && e.target.innerHTML == element.innerHTML && textarea.value.length > textarea.cols && 
-    Math.ceil( textarea_inp.value.length / textarea_inp.cols ) != Math.ceil( current_pos / textarea_inp.cols )   ) {   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
-      textarea_inp.selectionStart = current_pos + textarea_inp.cols + 1;        // вернули курсор в прежнюю позицию + 1 символ
-      textarea_inp.selectionEnd = current_pos + textarea_inp.cols + 1;
-    }
+    
 
     if ( e.target.classList.contains('key-capslk') && e.target.innerHTML == element.innerHTML ) {
       document.querySelectorAll('.key').forEach(element => {
@@ -1047,8 +1061,67 @@ document.addEventListener('mouseup', function (e) {
 
 
 
-
-
+document.addEventListener('keydown', function (e) {
+  const keys_div = document.querySelectorAll('.key');
+  let textarea_inp = document.querySelector('.entry-field');
+  let array_textarea = [];
+  let current_pos = textarea_inp.selectionStart;
+    
+    
+  if (e.code == "ArrowLeft") {
+       e.preventDefault();
+       let letter = "◄";                     // положили в временную переменную букву из клавиатуры по которой тыркнули мышкой
+       let new_array_textarea = [...textarea_inp.value];   // массив в который положили содержимое textarea до события клика по клавише
+       new_array_textarea.splice(current_pos,0,letter);    // добавили на позиции курсора букву из прожатой клавиши в временный массив
+       textarea_inp.value = new_array_textarea.join('');   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
+       textarea_inp.selectionStart = current_pos+1;        // вернули курсор в прежнюю позицию + 1 символ
+       textarea_inp.selectionEnd = current_pos+1;          // вернули курсор в прежнюю позицию + 1 символ (снять выделение)
+  }
+    
+  if (e.code == "ArrowUp") {
+       e.preventDefault();
+       let letter = "▲";                     // положили в временную переменную букву из клавиатуры по которой тыркнули мышкой
+       let new_array_textarea = [...textarea_inp.value];   // массив в который положили содержимое textarea до события клика по клавише
+       new_array_textarea.splice(current_pos,0,letter);    // добавили на позиции курсора букву из прожатой клавиши в временный массив
+       textarea_inp.value = new_array_textarea.join('');   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
+       textarea_inp.selectionStart = current_pos+1;        // вернули курсор в прежнюю позицию + 1 символ
+       textarea_inp.selectionEnd = current_pos+1;          // вернули курсор в прежнюю позицию + 1 символ (снять выделение)
+  }
   
+  if (e.code == "ArrowRight") {
+       e.preventDefault();
+       let letter = "►";                     // положили в временную переменную букву из клавиатуры по которой тыркнули мышкой
+       let new_array_textarea = [...textarea_inp.value];   // массив в который положили содержимое textarea до события клика по клавише
+       new_array_textarea.splice(current_pos,0,letter);    // добавили на позиции курсора букву из прожатой клавиши в временный массив
+       textarea_inp.value = new_array_textarea.join('');   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
+       textarea_inp.selectionStart = current_pos+1;        // вернули курсор в прежнюю позицию + 1 символ
+       textarea_inp.selectionEnd = current_pos+1;          // вернули курсор в прежнюю позицию + 1 символ (снять выделение)
+  }
+  
+  if (e.code == "ArrowDown") {
+       e.preventDefault();
+       let letter = "▼";                     // положили в временную переменную букву из клавиатуры по которой тыркнули мышкой
+       let new_array_textarea = [...textarea_inp.value];   // массив в который положили содержимое textarea до события клика по клавише
+       new_array_textarea.splice(current_pos,0,letter);    // добавили на позиции курсора букву из прожатой клавиши в временный массив
+       textarea_inp.value = new_array_textarea.join('');   // положили обратно содержимое textarea в textarea но с новой буквой прожатой клавишы
+       textarea_inp.selectionStart = current_pos+1;        // вернули курсор в прежнюю позицию + 1 символ
+       textarea_inp.selectionEnd = current_pos+1;          // вернули курсор в прежнюю позицию + 1 символ (снять выделение)
+  } 
+    
+    
+  
+});
 
 
+
+  document.addEventListener('keydown', function (e) {
+   let flag = false;
+      document.querySelectorAll('.key').forEach(element => {
+  
+        if ( element.innerHTML.toUpperCase() == e.key.toUpperCase() || e.key == "CapsLock" || e.key == "Control" || e.key == "Meta" || e.key == "ArrowLeft" || e.key == "ArrowUp" || e.key == "ArrowDown" || e.key == "ArrowRight" || e.key == "AltLeft" || e.key == "AltRight" || e.key == "Alt") 
+          flag = true;
+        
+      });
+   if (flag) return;
+   alert('Клавиша не распознана, проверьте соответствие раскладки на вашей клавиатуре и на виртуальной, они должны совпадать.');
+  });

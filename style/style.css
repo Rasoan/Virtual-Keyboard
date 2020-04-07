@@ -11,7 +11,7 @@
   resize: none;
   min-height: 100px;
   padding: 10px;
-  margin: 0 auto 30px;
+  margin: 0 auto 20px;
   font-weight: bold;
   font-size: 20px;
   border: 1px solid black;
@@ -208,4 +208,43 @@ text-transform: uppercase; /* Заглавные буквы */
 
 
 
+.reference {
+    position: absolute;
+    top: 70px;
+    left: calc( 50% - 145px);
+    overflow: hidden;
+    height: min-content;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    z-index: 30;
+}
 
+.reference__text {
+    width: 250px;
+    white-space: pre-wrap;
+}
+
+.button_reference {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: min-content;
+    margin: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 5px blue;
+    outline: none;
+}
+
+.button_reference:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px 5px red;
+}
+
+
+.none {
+  display: none;
+}
