@@ -34,7 +34,13 @@
   box-shadow: 0 8px 6px 6px rgba(0, 0, 0, 0.82), 
               0 20px 30px 1px rgba(189, 31, 31, 0.72), 
               0 25px 50px 1px rgba(189, 31, 31, 0.82),
-              0 300px 2000px 100px rgba(3, 2, 2, 0.82);
+              0 80px 50px 50px rgba(3, 2, 2, 0.82);
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 
