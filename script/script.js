@@ -819,24 +819,6 @@ let key_div;
 
 
 
-document.addEventListener('keydown', function (e) {
-
-  if (e.shiftKey == true && e.altKey == true && e.ctrlKey == true) {
-
-
-    document.querySelectorAll('.key').forEach(element => {
-
-      if (element.classList.contains('key-shift') || element.classList.contains('key-ctrl') || element.classList.contains('key-alt')) {
-        element.classList.add('key-active');
-      }
-    });
-
-  }
-
-
-});
-
-
 
 
 
@@ -845,6 +827,7 @@ document.addEventListener('keydown', function (e) {
 document.addEventListener('keydown', function (e) {
 
   if (e.shiftKey == true && e.altKey == true && flag == false && e.ctrlKey != true) {
+
 
     key_div = document.querySelectorAll('.keyboard-row');
 
@@ -855,6 +838,11 @@ document.addEventListener('keydown', function (e) {
 
     localStorage.language = "ru";
     inner_html("ru");
+    document.querySelectorAll('.key').forEach(element => {
+      if (element.classList.contains('key-shift-left') || element.classList.contains('key-alt-left')) {
+        element.classList.add('key-active');
+      }
+    });
     flag = true;
     return;
   }
@@ -867,6 +855,11 @@ document.addEventListener('keydown', function (e) {
     document.getElementsByClassName('keyboard-container').innerHTML = "";
     localStorage.language = "en";
     inner_html("en");
+    document.querySelectorAll('.key').forEach(element => {
+      if (element.classList.contains('key-shift-left') || element.classList.contains('key-alt-left')) {
+        element.classList.add('key-active');
+      }
+    });
     flag = false;
     return;
   }
@@ -912,14 +905,21 @@ document.addEventListener('keydown', function (e) {
     if (element.classList.contains('key-shift-right') && e.code == "ShiftRight")
       element.classList.add('key-active');
 
-    if (element.innerHTML == "Ctrl" && e.code == "ControlLeft")
+    if (element.innerHTML == "Ctrl" && e.code == "ControlLeft" ) { 
       element.classList.add('key-active');
+     
+    }
 
     if (element.classList.contains('key-alt-left') && e.code == "AltLeft")
       element.classList.add('key-active');
 
-    if (element.classList.contains('key-alt-right') && e.code == "AltRight")
+    if (element.classList.contains('key-alt-right') && e.code == "AltRight") {
       element.classList.add('key-active');
+    }
+
+    if (element.classList.contains('key-ctrl') && e.code == "AltRight") {
+      element.classList.remove('key-active');
+    }
 
     if (element.innerHTML == '◄' && e.code == "ArrowLeft")
       element.classList.add('key-active');
@@ -1118,7 +1118,7 @@ document.addEventListener('keydown', function (e) {
    let flag = false;
       document.querySelectorAll('.key').forEach(element => {
   
-        if ( element.innerHTML.toUpperCase() == e.key.toUpperCase() || e.key == "CapsLock" || e.key == "Control" || e.key == "Meta" || e.key == "ArrowLeft" || e.key == "ArrowUp" || e.key == "ArrowDown" || e.key == "ArrowRight" || e.key == "AltLeft" || e.key == "AltRight" || e.key == "Alt") 
+        if ( element.innerHTML.toUpperCase() == e.key.toUpperCase() || e.key == "CapsLock" || e.key == "Control" || e.key == "Meta" || e.key == "ArrowLeft" || e.key == "ArrowUp" || e.key == "ArrowDown" || e.key == "ArrowRight" || e.key == "AltLeft" || e.key == "AltGraph" || e.key == "Alt") 
           flag = true;
         
       });
